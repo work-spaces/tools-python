@@ -2,35 +2,11 @@
 
 """
 
-checkout.update_env(
-    rule = {"name": "update_env"},
-    env = {
-        "paths": ["/usr/bin", "/bin"],
-        "vars": {
-            "PS1": '"(spaces) $PS1"',
-        },
-    },
-)
-
 checkout.add_repo(
-    rule = {"name": "tools/sysroot-ninja"},
-    repo = {"url": "https://github.com/work-spaces/sysroot-ninja", "rev": "v1", "checkout": "Revision"},
-)
-
-checkout.add_repo(
-    rule = {"name": "tools/sysroot-cmake"},
+    rule = {"name": "tools/sysroot-gh"},
     repo = {
-        "url": "https://github.com/work-spaces/sysroot-cmake",
-        "rev": "v3",
-        "checkout": "Revision",
-    },
-)
-
-checkout.add_repo(
-    rule = {"name": "tools/sysroot-llvm"},
-    repo = {
-        "url": "https://github.com/work-spaces/sysroot-llvm",
-        "rev": "v19",
+        "url": "https://github.com/work-spaces/sysroot-gh",
+        "rev": "v2",
         "checkout": "Revision",
     },
 )
@@ -44,3 +20,48 @@ checkout.add_repo(
         "clone": "Spaces"
     },
 )
+
+checkout.add_which_asset(
+    rule = { "name": "which_pkg_config" },
+    asset = {
+        "which": "pkg-config",
+        "destination": "sysroot/bin/pkg-config"
+    }
+)
+
+workspace = info.get_absolute_path_to_workspace();
+
+run.add_exec(
+    rule = { "name": "configure" },
+    exec = {
+        "working_directory": "build",
+        "command": "../cpython/configure",
+        "args": [
+            "--with-pydebug",
+            "--prefix={}/build/install".format(workspace)
+        ]
+    }
+)
+
+run.add_exec(
+    rule = { "name": "build", "deps": ["configure"] },
+    exec = {
+        "working_directory": "build",
+        "command": "make",
+        "args": [
+            "-j8"
+        ]
+    }
+)
+
+run.add_exec(
+    rule = { "name": "install", "deps": ["build"] },
+    exec = {
+        "working_directory": "build",
+        "command": "make",
+        "args": [
+            "install"
+        ]
+    }
+)
+
