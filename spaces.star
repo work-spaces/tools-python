@@ -2,6 +2,8 @@
 Spaces configuration for building python
 """
 
+load("tools/sysroot-gh/publish.star", "add_publish_archive")
+
 checkout.add_repo(
     rule = {"name": "tools/sysroot-gh"},
     repo = {
@@ -11,11 +13,13 @@ checkout.add_repo(
     },
 )
 
+version = "3.11.10"
+
 checkout.add_repo(
     rule = {"name": "cpython"},
     repo = {
         "url": "https://github.com/python/cpython",
-        "rev": "v3.11.10",
+        "rev": "v{}".format(version),
         "checkout": "Revision",
         "clone": "Spaces"
     },
@@ -64,4 +68,13 @@ run.add_exec(
         ]
     }
 )
+
+add_publish_archive(
+    name = "python",
+    input = "build/install",
+    version = version,
+    deploy_repo = "https://github.com/work-spaces/tools-python",
+    deps = ["install"]
+)
+
 
