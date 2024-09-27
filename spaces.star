@@ -2,6 +2,16 @@
 
 """
 
+checkout.update_env(
+    rule = {"name": "update_env"},
+    env = {
+        "paths": ["/usr/bin", "/bin"],
+        "vars": {
+            "PS1": '"(spaces) $PS1"',
+        },
+    },
+)
+
 checkout.add_repo(
     rule = {"name": "tools/sysroot-ninja"},
     repo = {"url": "https://github.com/work-spaces/sysroot-ninja", "rev": "v1", "checkout": "Revision"},
@@ -17,12 +27,12 @@ checkout.add_repo(
 )
 
 checkout.add_repo(
-    rule = {"name": "tools/sysroot-llvm" },
+    rule = {"name": "tools/sysroot-llvm"},
     repo = {
         "url": "https://github.com/work-spaces/sysroot-llvm",
         "rev": "v19",
-        "checkout": "Revision"
-    }
+        "checkout": "Revision",
+    },
 )
 
 checkout.add_repo(
@@ -31,5 +41,6 @@ checkout.add_repo(
         "url": "https://github.com/python/cpython",
         "rev": "v3.11.10",
         "checkout": "Revision",
-    }
+        "clone": "Spaces"
+    },
 )
