@@ -19,7 +19,7 @@ checkout.add_repo(
         "url": "https://github.com/python/cpython",
         "rev": "v{}".format(version),
         "checkout": "Revision",
-        "clone": "Spaces"
+        "clone": "Worktree"
     },
 )
 

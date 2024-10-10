@@ -6,7 +6,7 @@ load("tools/sysroot-gh/publish.star", "add_publish_archive")
 load("tools-python/config.star", "version")
 
 
-workspace = info.get_absolute_path_to_workspace();
+workspace = info.get_absolute_path_to_workspace()
 
 run.add_exec(
     rule = { "name": "configure" },
