@@ -17,10 +17,17 @@ jobs:
     steps:
       - name: Install Spaces
         uses: work-spaces/install-spaces@v0.8.11-beta0
-        with:
-          toolchain: stable
-          target: x86_64-unknown-linux-gnu
-          components: rustfmt, clippy
       
       - name: Test Spaces
         run: spaces --version
+
+      - name: Clone Workflows Repo
+        uses: actions/checkout@v2
+        with:
+          repository: work-spaces/tools-workflows
+    
+      - name: Spaces Checkout
+        run: spaces checkout --script=tools-workflows/python.star --name=build-python
+
+      - name: Build Python
+        run: (cd build-python; spaces run)
