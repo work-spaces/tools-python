@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Build and Publish Python
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
@@ -25,9 +25,9 @@ jobs:
         run: git clone --depth=1 https://github.com/work-spaces/tools-workspaces --single-branch --branch=main
     
       - name: Spaces Checkout
-        run: ls && spaces checkout --script=tools-workspaces/python.star --name=build-python
+        run: spaces checkout --script=tools-workspaces/python.star --name=build-python
 
       - name: Build Python
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: cd build-python && ls && spaces run
+        run: cd build-python && spaces run
