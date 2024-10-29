@@ -22,12 +22,10 @@ jobs:
         run: spaces --version
 
       - name: Clone Tools Workspaces Repo
-        uses: actions/checkout@v2
-        with:
-          repository: work-spaces/tools-workspaces
+        run: git clone --depth=1 https://github.com/work-spaces/tools-workspaces --single-branch --branch=main
     
       - name: Spaces Checkout
-        run: cd .. && ls && spaces checkout --script=tools-workspaces/python.star --name=build-python
+        run: ls && spaces checkout --script=tools-workspaces/python.star --name=build-python
 
       - name: Build Python
         run: cd build-python && ls && spaces run
