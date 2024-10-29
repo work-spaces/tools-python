@@ -30,4 +30,7 @@ jobs:
         run: ls && spaces checkout --script=python.star --name=build-python
 
       - name: Build Python
-        run: (cd build-python; spaces run)
+        run: |
+            cd build-python
+            ls
+            spaces run
