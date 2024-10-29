@@ -28,4 +28,6 @@ jobs:
         run: ls && spaces checkout --script=tools-workspaces/python.star --name=build-python
 
       - name: Build Python
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: cd build-python && ls && spaces run
