@@ -1,0 +1,26 @@
+name: Build and Publish Binaries
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Trigger on version tags
+
+jobs:
+  build:
+    name: Build and Publish Python
+    runs-on: macos-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
+
+    steps:
+      - name: Install Spaces
+        uses: work-spaces/install-spaces@v0.8.11
+        with:
+          toolchain: stable
+          target: x86_64-unknown-linux-gnu
+          components: rustfmt, clippy
+      
+      - name: Test Spaces
+        run: spaces --version
