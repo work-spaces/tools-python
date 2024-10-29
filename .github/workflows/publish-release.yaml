@@ -27,7 +27,7 @@ jobs:
           repository: work-spaces/tools-workspaces
     
       - name: Spaces Checkout
-        run: ls && spaces checkout --script=tools-workspaces/python.star --name=build-python
+        run: ls && spaces checkout --script=python.star --name=build-python
 
       - name: Build Python
         run: (cd build-python; spaces run)
