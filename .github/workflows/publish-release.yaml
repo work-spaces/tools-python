@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Install Spaces
-        uses: work-spaces/install-spaces@v0.8.11
+        uses: work-spaces/install-spaces@v0.8.11-beta0
         with:
           toolchain: stable
           target: x86_64-unknown-linux-gnu
