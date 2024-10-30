@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Install Spaces
-        uses: work-spaces/install-spaces@v0.8.13
+        uses: work-spaces/install-spaces@v0.8.14
       
       - name: Test Spaces
         run: spaces --version
